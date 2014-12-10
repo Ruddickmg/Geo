@@ -5,7 +5,7 @@ GDAL ogr2ogr Docker container built on Ubuntu 14.4, can automatically download a
 
 This container was built with the specific purpose of automatically downloading and importing shape files from the US census website, but can be modified to do other things, which I may or may not do myself in the future. 
 
-The container will connect to an sql database container that it has been linked to and use that containers environment variables allongside GDAL:ogr2ogr to import US census shape files. ogr2ogr needs environment variabls of PASSWORD, DBNAME and USER to be set in the linked database container, or have those variables set in its Docker run command in order to function properly.
+The container will connect to an sql database container that it has been linked to and use that containers environment variables allongside GDAL:ogr2ogr to import US census shape files. ogr2ogr needs environment variables of PASSWORD, DBNAME and USER to be set in the linked database container, or have those variables set in its Docker run command in order to function properly.
 
 The Geo container will search for a directory in its /var/www directory called 'shapes' and all shapefiles will be downloaded to that location 
 
@@ -32,7 +32,7 @@ Can be set to anything and will use the connection data from the linked database
 -
 Can be set if a custom database name(s) not specified by the linked container is desired, the name or array of names will be used as the destination of the shape files import into the sql database
 
-'HOST','PORT','USER', 'PASSWORD' and 'DBNAME' 
+'HOST','PORT','HUSER', 'PASSWORD' and 'DBNAME' 
 -
 ( note: setting 'DBNAME' will set that name to a variable that will be overridden by the 'DATABASE' environment variable, in this case it would be best to use 'DATABASE' to define the databases that will be imported to )
 
@@ -40,7 +40,7 @@ Can be set if linked container does not contain those environment variables, or 
 
 All of these environment variables can be stringed together, for example:
 
-Docker RUN -d -v shapefile/diretory/path:/var/www -e SHAPES=city,county,state,division,district -e IMPORT=yes -e DATABASE=dbname,dbname2 -e HOST=0.0.0.0 -e PORT=3306 -e PASSWORD=password -e USER=user --link database:geo repo/name:tag
+Docker RUN -d -v shapefile/diretory/path:/var/www -e SHAPES=city,county,state,division,district -e IMPORT=yes -e DATABASE=dbname,dbname2 -e HOST=0.0.0.0 -e PORT=3306 -e PASSWORD=password -e HUSER=user --link database:geo repo/name:tag
 
 would set all connection variables and download and import all shapefiles, however, the easiest way and its intended use is simply to link to the database container(s), in which case only the 'SHAPES' and 'IMPORT' varables need be specified respectively...
 
