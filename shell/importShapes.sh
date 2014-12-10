@@ -1,5 +1,5 @@
 # if any shape files have been specified for download then attempt to import them
-if [[ ! -z "$IMPORTS" ]] 
+if [[ ! -z "$IMPORT" ]] 
 then
 	echo " "
 	echo " -----------------------------------------------------------------------"
@@ -18,10 +18,17 @@ then
 		Addr=$(env | egrep $Alias'_PORT_'$Port'_TCP_ADDR=' | grep -o '=.*' | tr -d '=')
 		Pwd=$( env | grep $Alias'_ENV_PASSWORD=' | grep -o '=.*' | tr -d '", =')
 		User=$( env | grep $Alias'_ENV_HUSER=' | grep -o '=.*' | tr -d '", =')
+		Extdbname=$(env | grep $Alias'_ENV_DBNAME=' | grep -o '=.*' | tr -d '", =')	
 
-		# get an array of which databases to install the shape files to	
-
-		IFS=',' read -a shapeDB <<< "$IMPORTS"
+		# get an array of which databases to install the shape files to
+		if [ -z	$DATABASE ] 
+		then
+			dbn=$ExtdbName # try to use database name defined in linked container if not defined in "$DATABASE" env variable
+		else
+			dbn=$DATABASE # set custom database name(s) to import to if wanted
+		fi
+			
+		IFS=',' read -a shapeDB <<< "$dbn"
 		for dbName in "${shapeDB[@]}"
 		do			
 			x=0
