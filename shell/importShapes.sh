@@ -20,16 +20,17 @@ then
 		User=$( env | grep $Alias'_ENV_HUSER=' | grep -o '=.*' | tr -d '", =')
 		Extdbname=$(env | grep $Alias'_ENV_DBNAME=' | grep -o '=.*' | tr -d '", =')	
 
+		IFS=',' read -a shapeDB <<< "$DATABASE"
+		
 		# get an array of which databases to install the shape files to
-		if [ -z	$DATABASE ] 
+		if [ -z	"$DATABASE" ] 
 		then
-			dbn=$ExtdbName # try to use database name defined in linked container if not defined in "$DATABASE" env variable
+			dbn=$Extdbname # try to use database name defined in linked container if not defined in "$DATABASE" env variable
 		else
-			dbn=$DATABASE # set custom database name(s) to import to if wanted
+			dbn="${shapeDB[@]}" # set custom database name(s) to import to if wanted
 		fi
 			
-		IFS=',' read -a shapeDB <<< "$dbn"
-		for dbName in "${shapeDB[@]}"
+		for dbName in $dbn
 		do			
 			x=0
 			until [[ ! -z $( mysql -h "$Addr" -P "$Port" -u"$User" -p"$Pwd" -B -e "show databases" 2>/dev/null | grep "$dbName" ) ]]
