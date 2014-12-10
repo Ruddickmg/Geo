@@ -20,13 +20,14 @@ then
 		User=$( env | grep $Alias'_ENV_HUSER=' | grep -o '=.*' | tr -d '", =')
 		Extdbname=$(env | grep $Alias'_ENV_DBNAME=' | grep -o '=.*' | tr -d '", =')	
 
-		IFS=',' read -a shapeDB <<< "$DATABASE"
+
 		
 		# get an array of which databases to install the shape files to
 		if [ -z	"$DATABASE" ] 
 		then
 			dbn=$Extdbname # try to use database name defined in linked container if not defined in "$DATABASE" env variable
 		else
+			IFS=',' read -a shapeDB <<< "$DATABASE"
 			dbn="${shapeDB[@]}" # set custom database name(s) to import to if wanted
 		fi
 			
