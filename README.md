@@ -40,7 +40,7 @@ division will be: county_subdivision_shape_files
 
 State will be: state_shape_files
 
-(note 'IMPORT' can also be ommitted if importing the shapefiles is not the desired action)
+( note: 'IMPORT' can also be ommitted if importing the shapefiles is not the desired action )
 
 'DATABASE' 
 -
