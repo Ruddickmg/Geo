@@ -26,6 +26,15 @@ The process of downloading all the shapefiles can take time, therefore if you ha
 -
 Can be set to anything and will use the connection data from the linked database container to connect and import the shape files it finds in the 'shapes' directory into its linked database or databases. 
 
+The table resulting form the import are fairly streight forward:
+
+city shape files will be imported into a db column named: city_shape_files
+upper (senate) district table is named: district_upper_shape_files
+lower (house) district table is named: district_lower_shape_files
+county will be: county_shape_files
+division will be: county_subdivision_shape_files
+and State will be: state_shape_files
+
 'IMPORT' can also be ommitted if importing the shapefiles is not the desired action
 
 'DATABASE' 
