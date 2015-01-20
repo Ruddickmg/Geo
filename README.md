@@ -28,17 +28,17 @@ Can be set to anything and will use the connection data from the linked database
 
 The table resulting form the import are fairly streight forward:
 
-City shape files will be imported into a table named: city_shape_files
+City shape files will be imported into a table named: cities
 
-Upper (senate) District table is named: district_upper_shape_files
+Upper (senate) District table is named: upper_districts
 
-Lower (house) District table is named: district_lower_shape_files
+Lower (house) District table is named: lower_districts
 
-County becomes: county_shape_files
+County becomes: counties
 
-Division becomes: county_subdivision_shape_files
+Division becomes: subdivisions
 
-and State becomes: state_shape_files
+and State becomes: states
 
 ( note: 'IMPORT' can also be ommitted if importing the shapefiles is not the desired action )
 
