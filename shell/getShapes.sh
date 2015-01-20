@@ -48,7 +48,7 @@ function makeDir {
 }
 
 # if there are shapes specified for download then attempt to download them
-if [ ! -z "$SHAPES" ] 
+if [ ! -z "$DOWNLOAD" ] 
 then
 
 	echo " "
